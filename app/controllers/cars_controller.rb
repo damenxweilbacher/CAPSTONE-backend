@@ -14,7 +14,7 @@ class CarsController < ApplicationController
   end
 
   def create
-    @car = Car.new(model: params[:model], year: params[:year], manufacturer_id: params[:manufacturer_id], image_url: params[:image_url])
+    @car = Car.new(model: params[:model], year: params[:year], image_url: params[:image_url], manufacturer_id: params[:manufacturer_id])
      
     @car.save!
     render json: @car, status: :created
