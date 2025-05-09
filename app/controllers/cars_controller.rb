@@ -14,7 +14,7 @@ class CarsController < ApplicationController
   end
 
   def create
-    @car = Car.new(model: params[:model], year: params[:year], manufacturer_id: params[:manufacturer_id])
+    @car = Car.new(model: params[:model], year: params[:year], manufacturer_id: params[:manufacturer_id], image_url: params[:image_url])
      
     @car.save!
     render json: @car, status: :created
@@ -24,7 +24,7 @@ class CarsController < ApplicationController
   def update
     @car = Car.find(params[:id])
     
-    @car.update(model: params[:model], year: params[:year])
+    @car.update(model: params[:model], year: params[:year], image_url: params[:image_url])
     @car.save!
     render json: @car
     puts "update function"
