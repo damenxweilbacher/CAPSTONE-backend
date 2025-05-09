@@ -14,11 +14,23 @@ class CarsController < ApplicationController
   end
 
   def create
-    @car = Car.new(model: params[:model], year: params[:year], image_url: params[:image_url], manufacturer_id: params[:manufacturer_id])
+    # Convert manufacturer_id to integer
+    manufacturer_id = params[:manufacturer_id].to_i if params[:manufacturer_id].present?
+    
+    @car = Car.new(
+      model: params[:model],
+      year: params[:year].to_i,
+      image_url: params[:image_url],
+      manufacturer_id: manufacturer_id
+    )
      
-    @car.save!
-    render json: @car, status: :created
-    puts "create function"
+    if @car.save
+      render json: @car, status: :created
+      puts "create function"
+    else
+      render json: { errors: @car.errors.full_messages }, status: :unprocessable_entity
+      puts "Failed to create car: #{@car.errors.full_messages}"
+    end
   end
 
   def update
