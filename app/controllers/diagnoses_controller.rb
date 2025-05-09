@@ -18,7 +18,7 @@ class DiagnosesController < ApplicationController
   end
 
   def create
-    @diagnosis = Diagnosis.new(name: params[:name], description: params[:description])
+    @diagnosis = Diagnosis.new(name: params[:name], description: params[:description], category_id: params[:category_id])
      
     @diagnosis.save!
     render json: @diagnosis, status: :created

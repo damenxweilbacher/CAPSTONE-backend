@@ -20,7 +20,7 @@ class DiagnosisPromptsController < ApplicationController
   end
 
   def create
-    @diagnosis_prompt = DiagnosisPrompt.new(question: params[:question], diagnosis_id: params[:diagnosis_id])
+    @diagnosis_prompt = DiagnosisPrompt.new(question: params[:question], diagnosis_id: params[:diagnosis_id], category_id: params[:category_id])
      
     @diagnosis_prompt.save!
     render json: @diagnosis_prompt, status: :created

@@ -10,12 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_09_094232) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_09_100904) do
   create_table "cars", force: :cascade do |t|
-    t.integer "year"
     t.string "model"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "year"
     t.integer "manufacturer_id"
     t.string "image_url"
   end
