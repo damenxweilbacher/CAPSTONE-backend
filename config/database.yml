@@ -31,5 +31,5 @@ production: &prod
 cable:
   <<: *prod
 
-  queue:
+queue:
   <<: *prod 
