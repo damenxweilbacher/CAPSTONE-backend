@@ -30,3 +30,6 @@ production: &prod
 # Action Cable connection (just reuse the prod settings)
 cable:
   <<: *prod
+
+  queue:
+  <<: *prod 
