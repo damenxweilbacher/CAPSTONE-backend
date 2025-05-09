@@ -1,3 +1,3 @@
 class DiagnosisPrompt < ApplicationRecord
-  belongs_to :diagnosis
+  belongs_to :category
 end

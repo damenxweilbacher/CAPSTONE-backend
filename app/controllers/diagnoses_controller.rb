@@ -2,17 +2,23 @@ class DiagnosesController < ApplicationController
    # establish all 5 crud actions
   
    def index
-    @diagnoses = Diagnosis.all
-    render json: @diagnoses # using interpolation bc it doesn't work on react without @
+    if params[:category]
+      category = Category.find_by(name: params[:category])
+      @prompts = category ? category.diagnoses : []
+    else
+      @prompts = Diagnosis.all
+    end
+
+    render json: @prompts.to_json(include: :category)
   end
 
   def show
-    @diagnosis = Diagnosis.find(params[:id]) # using params[:id] in order to have dynamic search functions :D
-    render json: @diagnosis
+    @diagnosis = Diagnosis.find(params[:id])
+    render json: @diagnosis.to_json(include: :category)
   end
 
   def create
-    @diagnosis = Diagnosis.new(params[:name], params[:description])
+    @diagnosis = Diagnosis.new(name: params[:name], description: params[:description])
      
     @diagnosis.save!
     render json: @diagnosis, status: :created
@@ -21,7 +27,7 @@ class DiagnosesController < ApplicationController
   def update
     @diagnosis = Diagnosis.find(params[:id])
     
-    @diagnosis.update(params[:name], params[:description])
+    @diagnosis.update(category_id: params[:category_id])
     
     @diagnosis.save!
     render json: @diagnosis

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_30_083911) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_05_123259) do
   create_table "cars", force: :cascade do |t|
     t.integer "year"
     t.string "model"
@@ -19,11 +19,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_30_083911) do
     t.string "manufacturer_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
   create_table "diagnoses", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id"
   end
 
   create_table "diagnosis_prompts", force: :cascade do |t|
@@ -31,6 +38,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_30_083911) do
     t.integer "diagnosis_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id"
   end
 
   create_table "manufacturers", force: :cascade do |t|
