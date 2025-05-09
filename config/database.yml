@@ -33,3 +33,6 @@ cable:
 
 queue:
   <<: *prod 
+
+cache:
+  <<: *prod
